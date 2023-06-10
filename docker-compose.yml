@@ -1,0 +1,9 @@
+version: "1"
+services:
+       shopping_list:
+           container_name: shopping_list
+           image: nolanm99/shopping_list
+           restart: always
+           build: .
+           ports:
+             - "3000:3000"
