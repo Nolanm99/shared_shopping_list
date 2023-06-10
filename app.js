@@ -10,15 +10,6 @@ var listRouter = require('./routes/list');
 
 var app = express();
 
-var mdns = require('multicast-dns')()
-
-mdns.on('query', function(query) {
-  if (query.questions[0] && query.questions[0].name === 'shoppinglist.local') {
-    console.log(query)
-    mdns.respond([{name:'shoppinglist.local', type:'A', data:'192.168.0.6'}]) // see below
-  }
-})
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
