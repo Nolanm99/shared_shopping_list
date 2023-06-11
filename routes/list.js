@@ -4,8 +4,9 @@ const ShoppingListDatabase  = require('../helper/shopping_list_db');
 const router = express.Router();
 const DB_CONFIG = config.DB_CONFIG;
 
-
-shopping_list_db = new ShoppingListDatabase(DB_CONFIG.URL, DB_CONFIG.NAME);
+db_url = process.env.DB_URL || DB_CONFIG.URL;
+db_name = process.env.DB_NAME || DB_CONFIG.NAME;
+shopping_list_db = new ShoppingListDatabase(db_url, db_name);
 
 router.get('/', async (req, res, next) => {
     all_lists = await shopping_list_db.get_all_lists();

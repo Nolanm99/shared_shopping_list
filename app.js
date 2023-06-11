@@ -42,5 +42,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
-module.exports.handler = serverless(app);
+const port = process.env.PORT || 3000;
+app.listen(port, () =>
+  console.log(`Example app is listening on port ${port}.`)
+);
