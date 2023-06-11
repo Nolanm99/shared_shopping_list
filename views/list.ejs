@@ -24,7 +24,7 @@
     <div class="container">
       <ul class="list-group" id="shopping_list_items">
         <% items.forEach(function(item,index){ %>
-            <li class="list-group-item" contenteditable="true" onblur="saveChanges(this)"> <%= item %> </li>
+            <li class="list-group-item" contenteditable="true" onblur="saveChanges()"> <%= item %> </li>
         <% }) %>
       </ul>
     </div>
@@ -40,8 +40,8 @@
         }
       }
 
-      function saveChanges(element) {
-        var new_list_html = Array.from(element.parentNode.children);
+      function saveChanges() {
+        var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
         var new_list_text = [];
         new_list_html.forEach( (item_html)  => {
           if (item_html.innerText) {
@@ -90,9 +90,9 @@
           newListElement.contentEditable = 'true';
           newListElement.innerText = '';
           newListElement.classList.add('list-group-item');
-          newListElement.onblur = saveChanges(list);
           addEnterListener(newListElement);
           list.appendChild(newListElement);
+          newListElement.onblur = saveChanges;
           newListElement.focus();
       }
 
