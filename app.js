@@ -42,6 +42,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const handler = serverless(api);
-
 module.exports = app;
+module.exports.handler = serverless(app);
