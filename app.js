@@ -8,8 +8,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var listRouter = require('./routes/list');
 
-var serverless = require('serverless-http');
-
 var app = express();
 
 // view engine setup
