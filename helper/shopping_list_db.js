@@ -1,5 +1,6 @@
 const crypto                            = require('crypto');
 const {MongoClient, ServerApiVersion}   = require('mongodb');
+const { stringify } = require('querystring');
 
 class ShoppingListDatabase {
 
@@ -39,9 +40,9 @@ class ShoppingListDatabase {
     
     async update_list_contents(list_id, new_contents) {
         const list_collection = this.db.collection("shopping_list");
-        let query = { list_id: list_id };
+        let query = { list_id: list_id.trim() };
         let new_values = { $set: {items: new_contents}}
-        list_collection.updateOne(query, new_values);
+        await list_collection.updateOne(query, new_values);
     }
 
     #create_new_list_id() {

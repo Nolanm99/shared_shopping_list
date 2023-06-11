@@ -23,7 +23,6 @@ router.get('/new_list', async (req, res, next) => {
 router.get('/:list_id', async (req, res, next) => {
     var list_id = req.params.list_id
     var list_contents = await shopping_list_db.get_list_contents(list_id);
-    console.log(Object.values(list_contents));
     res.render('list', {
         items: Object.values(list_contents),
         list_id: list_id

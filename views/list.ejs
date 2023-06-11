@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col">
         <p id="list_id">
-          List ID: <%= list_id %>
+          <%= list_id %>
         </p>
       </div>
       <div class="col">
@@ -45,7 +45,7 @@
         }
       }
 
-      function saveChanges() {
+      async function saveChanges() {
         var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
         var new_list_text = [];
         new_list_html.forEach( (item_html)  => {
@@ -58,7 +58,7 @@
 
         list_id = document.getElementById("list_id").innerText;
 
-        fetch('/list/update_list', {
+        await fetch('/list/update_list', {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
