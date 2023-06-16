@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
     all_lists = await shopping_list_db.get_all_lists();
     console.log(all_lists);
     res.render('index', {
-        title: 'Express',
+        title: 'Noted.zip',
         app_version: config.APP_VERSION
     });
 });
