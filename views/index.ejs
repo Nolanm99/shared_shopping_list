@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <%- include('header'); -%>
+  <%- include('navbar'); -%>
   <body>
-    <div class="container">
+    <div class="container pt-3">
       <div class="row">
         <div class="col">
           <form action="/list/new_list">
-            <button class="btn btn-primary">New List</button>
+            <button class="btn btn-dark">New List</button>
           </form>
         </div>
         <div class="col">
@@ -18,7 +19,7 @@
                 </div>
               </div>
               <div class="col">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-dark">Submit</button>
               </div>
             </div>
           </form>

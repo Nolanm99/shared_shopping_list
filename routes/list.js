@@ -27,7 +27,7 @@ router.get('/:list_id', async (req, res, next) => {
     var list_id = req.params.list_id
     var list_contents = await shopping_list_db.get_list_contents(list_id);
     res.render('list', {
-        title: "List View",
+        title: "List | Noted.zip",
         app_version: config.APP_VERSION,
         items: Object.values(list_contents),
         list_id: list_id

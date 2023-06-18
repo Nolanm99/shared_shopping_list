@@ -2,33 +2,33 @@ async function copyToClipboard() {
     var copyText = document.getElementById("list_id");
     try {
         await navigator.clipboard.writeText(copyText.innerText);
-        alert('Text copied to clipboard');
+        alert('List ID to clipboard');
     } catch (err) {
         alert('Failed to copy text');
     }
 }
 
 async function saveChanges() {
-var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
-var new_list_text = [];
-new_list_html.forEach( (item_html)  => {
-    if (item_html.innerText) {
-    new_list_text.push(item_html.innerText);
-    }
-})
-console.log(`saving new list`);
-console.log(new_list_text)
+    var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
+    var new_list_text = [];
+    new_list_html.forEach( (item_html)  => {
+        if (item_html.innerText) {
+        new_list_text.push(item_html.innerText);
+        }
+    })
+    console.log(`New list state:`);
+    console.log(new_list_text)
 
-list_id = document.getElementById("list_id").innerText;
+    list_id = document.getElementById("list_id").innerText;
 
-await fetch('/list/update_list', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ "list_id": list_id, "new_list_contents": new_list_text })
-})
+    await fetch('/list/update_list', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "list_id": list_id, "new_list_contents": new_list_text })
+    })
 }
 
 window.onload = function() {
