@@ -38,6 +38,7 @@ router.post('/update_list', async (req, res, next) => {
     let new_list_contents = req.body.new_list_contents;
     let list_id = req.body.list_id;
     await shopping_list_db.update_list_contents(list_id, new_list_contents);
+    res.send('ok');
 })
 
 module.exports = router;

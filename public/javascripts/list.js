@@ -8,7 +8,7 @@ async function copyToClipboard() {
     }
 }
 
-async function saveChanges() {
+function saveChanges() {
     var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
     var new_list_text = [];
     new_list_html.forEach( (item_html)  => {
@@ -21,7 +21,7 @@ async function saveChanges() {
 
     list_id = document.getElementById("list_id").innerText;
 
-    await fetch('/list/update_list', {
+    fetch('/list/update_list', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -29,6 +29,7 @@ async function saveChanges() {
         },
         body: JSON.stringify({ "list_id": list_id, "new_list_contents": new_list_text })
     })
+    return
 }
 
 window.onload = function() {
