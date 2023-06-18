@@ -4,7 +4,7 @@ async function copyToClipboard() {
         await navigator.clipboard.writeText(copyText.innerText);
         alert('List ID to clipboard');
     } catch (err) {
-        alert('Failed to copy text');
+        alert(err);
     }
 }
 
@@ -13,7 +13,7 @@ async function saveChanges() {
     var new_list_text = [];
     new_list_html.forEach( (item_html)  => {
         if (item_html.innerText) {
-        new_list_text.push(item_html.innerText);
+            new_list_text.push(item_html.innerText.trim());
         }
     })
     console.log(`New list state:`);
@@ -39,17 +39,17 @@ for (var i = 0; i < list.children.length; i++) {
 }
 
 function addEnterListener(element) {
-element.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        var nextElement = getNextElement(element);
-        if (nextElement) {
-            nextElement.focus();
-        } else {
-            addListItem();
+    element.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            var nextElement = getNextElement(element);
+            if (nextElement) {
+                nextElement.focus();
+            } else {
+                addListItem();
+            }
         }
-    }
-});
+    });
 }
 
 function addListItem() {
@@ -69,4 +69,17 @@ function getNextElement(element) {
         element = element.nextSibling;
     } while (element && element.nodeType !== 1);
     return element;
+}
+
+function deleteListItem(btn) {
+    console.log('pressed delete')
+    btn.closest('.list-group-item').remove();
+    saveChanges();
+}
+
+function handleInput(event) {
+    if (event.target.innerText.trim() === '') {
+        // Ensure we always have a non-breaking space when the li is empty
+        event.target.innerHTML = '&nbsp;';
+    }
 }
