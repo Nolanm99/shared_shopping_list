@@ -8,6 +8,29 @@ async function copyToClipboard() {
     }
 }
 
+// Click button when pressing enter
+var input = document.getElementById("new_item_text");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("item_submit").click();
+  }
+});
+
+function appendNewItem() {
+    new_item_text_box = document.getElementById("new_item_text");
+    list = document.getElementById('shopping_list_items');
+    newListElement = document.createElement('li');
+    newListElement.setAttribute('class', 'list-group-item');
+    newListElement.innerHTML = `<div class="row"><div class="col" onInput="handleInput(event)" onBlur="saveChanges(event)">${new_item_text.value}</div><div class="col-auto"><button class="btn bg-transparent btn-sm float-right" onclick="deleteListItem(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="13" height="13"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path></svg></button></div></div>`;
+    list.appendChild(newListElement);
+
+    new_item_text_box.value = '';
+    new_item_text.focus();
+
+    saveChanges();
+}
+
 function saveChanges() {
     var new_list_html = Array.from(document.getElementById('shopping_list_items').children);
     var new_list_text = [];
@@ -32,55 +55,8 @@ function saveChanges() {
     return
 }
 
-window.onload = function() {
-var list = document.getElementById('shopping_list_items');
-for (var i = 0; i < list.children.length; i++) {
-    addEnterListener(list.children[i]);
-}
-}
-
-function addEnterListener(element) {
-    element.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            var nextElement = getNextElement(element);
-            if (nextElement) {
-                nextElement.focus();
-            } else {
-                addListItem();
-            }
-        }
-    });
-}
-
-function addListItem() {
-    var list = document.getElementById('shopping_list_items');
-    var newListElement = document.createElement('li');
-    newListElement.contentEditable = 'true';
-    newListElement.innerText = '';
-    newListElement.classList.add('list-group-item');
-    addEnterListener(newListElement);
-    list.appendChild(newListElement);
-    newListElement.onblur = saveChanges;
-    newListElement.focus();
-}
-
-function getNextElement(element) {
-    do {
-        element = element.nextSibling;
-    } while (element && element.nodeType !== 1);
-    return element;
-}
-
 function deleteListItem(btn) {
     console.log('pressed delete')
     btn.closest('.list-group-item').remove();
     saveChanges();
-}
-
-function handleInput(event) {
-    if (event.target.innerText.trim() === '') {
-        // Ensure we always have a non-breaking space when the li is empty
-        event.target.innerHTML = '&nbsp;';
-    }
 }
