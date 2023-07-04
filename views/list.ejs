@@ -6,22 +6,24 @@
     <div class="container pt-3">
       <div class="row">
         <div class="col">
-          <h5 style="display: inline-block">List ID:</h5>
-          <p id="list_id" style="display: inline-block"><%= list_id %></p>
-          <button class="btn bg-white" onclick="copyToClipboard()">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>
-          </button>
+          <span><h6 style="display: inline-block">Copy list ID</h6></span>
+          <span>
+            <button class="btn bg-white" onclick="copyToClipboard()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg></button>
+          </span>
+          <p hidden id="list_id" style="display: inline-block"><%= list_id %></p>
         </div>
       </div>
       <br>
-      <div class="container">
         <div class="input-group mb-3">
           <input id="new_item_text" type="text" class="form-control" placeholder="New Item" aria-label="New Item" aria-describedby="basic-addon2">
           <div class="input-group-append">
             <button id="item_submit" class="btn btn-outline-secondary" onclick="appendNewItem()" type="button">Add</button>
           </div>
         </div>
-        <span id="list_state" class="badge badge-success">Saved to Cloud</span>
+        <div class="pb-1">
+          <span id="list_state" class="badge badge-success pb-1">Saved to Cloud</span>
+          <img id="loading_image" hidden src="/images/loading.svg"></img>
+        </div>
         <ul class="list-group" id="shopping_list_items">
           <% if (items.length > 0) { %>
             <% items.forEach(function(item,index){ %>
@@ -35,7 +37,6 @@
           <%} %>
 
         </ul>
-      </div>
     </div>
   </body>
   <script src="/javascripts/list.js"></script>  

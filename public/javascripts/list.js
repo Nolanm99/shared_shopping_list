@@ -18,9 +18,11 @@ class ListState {
         if (this.saved_state) {
             this.state_element.innerText = "Saved to Cloud";
             this.state_element.setAttribute('class', 'badge badge-success');
+            document.getElementById("loading_image").hidden = true;
         } else {
             this.state_element.innerText = "Saving...";
             this.state_element.setAttribute('class', 'badge badge-warning');
+            document.getElementById("loading_image").hidden = false;
         }
     }
 
