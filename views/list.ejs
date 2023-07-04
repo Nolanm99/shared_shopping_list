@@ -21,6 +21,7 @@
             <button id="item_submit" class="btn btn-outline-secondary" onclick="appendNewItem()" type="button">Add</button>
           </div>
         </div>
+        <span id="list_state" class="badge badge-success">Saved to Cloud</span>
         <ul class="list-group" id="shopping_list_items">
           <% if (items.length > 0) { %>
             <% items.forEach(function(item,index){ %>

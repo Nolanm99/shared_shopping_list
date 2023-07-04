@@ -8,6 +8,30 @@ async function copyToClipboard() {
     }
 }
 
+class ListState {
+    constructor() {
+        this.saved_state = true;
+        this.state_element = document.getElementById("list_state");
+    }
+    
+    renderState() {
+        if (this.saved_state) {
+            this.state_element.innerText = "Saved to Cloud";
+            this.state_element.setAttribute('class', 'badge badge-success');
+        } else {
+            this.state_element.innerText = "Saving...";
+            this.state_element.setAttribute('class', 'badge badge-warning');
+        }
+    }
+
+    setState(newState) {
+        this.saved_state = newState;
+        this.renderState();
+    }
+}
+
+list_state = new ListState();
+
 // Click button when pressing enter
 var input = document.getElementById("new_item_text");
 input.addEventListener("keypress", function(event) {
@@ -28,7 +52,15 @@ function appendNewItem() {
     new_item_text_box.value = '';
     new_item_text.focus();
 
+    list_state.setState(false);
+
     saveChanges();
+
+    setTimeout(
+        function() {
+            list_state.setState(true);
+        }, 500
+    );
 }
 
 function saveChanges() {
