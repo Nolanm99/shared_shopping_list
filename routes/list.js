@@ -23,6 +23,14 @@ router.get('/new_list', async (req, res, next) => {
     res.redirect(`/list/${new_list_id}`);
 });
 
+router.post('/new_list_with_item', async (req, res, next) => {
+    new_item = req.body.new_item_text;
+    new_list_id = await shopping_list_db.create_new_list();
+    console.log(new_list_id);   
+    await shopping_list_db.update_list_contents(new_list_id, [new_item])
+    res.redirect(`/list/${new_list_id}`);
+});
+
 router.get('/:list_id', async (req, res, next) => {
     var list_id = req.params.list_id
     var list_contents = await shopping_list_db.get_list_contents(list_id);

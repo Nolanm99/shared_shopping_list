@@ -6,30 +6,43 @@
     <div class="container pt-3">
       <div class="row">
         <div class="col">
-          <form action="/list/new_list">
-            <button class="btn btn-dark">New List</button>
+          <form action="/list/new_list_with_item" method="POST">
+            <div class="input-group mb-3">
+              <input name="new_item_text" id="new_item_text" type="text" class="form-control" placeholder="New Item" aria-label="List Item" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="item_submit" class="btn btn-dark" type="submit">Start New List</button>
+              </div>
+            </div>
           </form>
         </div>
         <div class="col">
           <form id="existing_list_form">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="list_id" aria-describedby="list_id" placeholder="Existing List ID">
-                </div>
-              </div>
-              <div class="col">
-                <button type="submit" class="btn btn-dark">Submit</button>
+            <div class="input-group mb-3">
+              <input id="existing_list_id" type="text" class="form-control" placeholder="Already have a list? Enter ID" aria-label="List Item" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="item_submit" class="btn btn-dark" type="submit">Go</button>
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="container pt-5" style="width: 70%; height: 20%;">
+        <div class="jumbotron" style="padding: 25px;">
+          <div class="container">
+            <h1 class="display-4" style="font-size: 35px;">Noted.zip</h1>
+            <p class="lead">Create a list in a snap, share with a click, and collaborate easily with our note-taking app.</p>
+            <hr class="my-4">
+            <p class="lead">
+              <a class="btn btn-primary btn-m" href="/list/new_list" role="button">Start new list</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
     <script>
       document.getElementById('existing_list_form').addEventListener('submit', function(event) {
         event.preventDefault();  // Prevents form from submitting in the usual way
-        var inputVal = `/list/${document.getElementById('list_id').value}`;
+        var inputVal = `/list/${document.getElementById('existing_list_id').value}`;
         this.action = inputVal;  // Changes form action to the value of the input
         this.submit();  // Submits the form
       });
