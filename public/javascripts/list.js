@@ -52,7 +52,10 @@ function appendNewItem() {
     list.appendChild(newListElement);
 
     new_item_text_box.value = '';
-    new_item_text.focus();
+
+    // Focus to hidden text box, then back to actual text box
+    // to workaround mobile safari issues
+    do_workaround_for_ios_textbox_focus_issues();
 
     list_state.setState(false);
 
@@ -63,6 +66,33 @@ function appendNewItem() {
             list_state.setState(true);
         }, 500
     );
+}
+
+function do_workaround_for_ios_textbox_focus_issues() {
+    new_item_text_box = document.getElementById("new_item_text");
+    const fakeInput = document.createElement('input')
+    fakeInput.setAttribute('type', 'text')
+    fakeInput.style.position = 'absolute'
+    fakeInput.style.opacity = 0
+    fakeInput.style.height = 0
+    fakeInput.style.fontSize = '16px' // disable auto zoom
+
+    // you may need to append to another element depending on the browser's auto 
+    // zoom/scroll behavior
+    document.body.prepend(fakeInput)
+
+    // focus so that subsequent async focus will work
+    fakeInput.focus()
+
+    setTimeout(() => {
+
+        // now we can focus on the target input
+        new_item_text.focus()
+
+        // cleanup
+        fakeInput.remove()
+        
+    }, 10)
 }
 
 function saveChanges() {
@@ -90,7 +120,9 @@ function saveChanges() {
 }
 
 function deleteListItem(btn) {
-    console.log('pressed delete')
     btn.closest('.list-group-item').remove();
+    list_state.setState(false);
     saveChanges();
+    setTimeout(
+        function() { list_state.setState(true); }, 500);
 }

@@ -14,12 +14,12 @@
         </div>
       </div>
       <br>
-        <div class="input-group mb-3">
-          <input id="new_item_text" type="text" class="form-control" placeholder="New Item" aria-label="New Item" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button id="item_submit" class="btn btn-outline-secondary" onclick="appendNewItem()" type="button">Add</button>
-          </div>
+      <div class="input-group mb-3">
+        <input autocapitalize="sentences" id="new_item_text" type="text" class="form-control" placeholder="New Item" aria-label="New Item" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button id="item_submit" class="btn btn-outline-secondary" onclick="appendNewItem()" type="button">Add</button>
         </div>
+      </div>
         <div class="pb-1">
           <span id="list_state" class="badge badge-success pb-1">Saved to Cloud</span>
           <img id="loading_image" hidden src="/images/loading.svg"></img>
