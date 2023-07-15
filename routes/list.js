@@ -49,4 +49,9 @@ router.post('/update_list', async (req, res, next) => {
     res.send('ok');
 })
 
+router.get('/admin/get_all_list_content_json', async (req, res, next) => {
+    let all_lists = await shopping_list_db.get_all_lists();
+    console.log(all_lists);
+    res.json(all_lists);
+});
 module.exports = router;
