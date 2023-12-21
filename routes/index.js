@@ -10,4 +10,11 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/FAQ', function(req, res, next) {
+  res.render('faq', {
+    title: 'Noted.zip',
+    app_version: config.APP_VERSION
+  });
+});
+
 module.exports = router;
