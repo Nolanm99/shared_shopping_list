@@ -1,9 +1,8 @@
 const crypto                            = require('crypto');
 const {MongoClient, ServerApiVersion}   = require('mongodb');
-const { stringify } = require('querystring');
+
 
 class ShoppingListDatabase {
-
     constructor( db_url, db_name ) {
         this.db_url = db_url;
         this.db_name = db_name;
